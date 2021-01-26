@@ -1,0 +1,36 @@
+{
+  "name": "konami-code-js",
+  "version": "1.0.0",
+  "description": "Konami Code implementation with JavaScript.",
+  "keywords": [
+    "javascript",
+    "konami",
+    "code"
+  ],
+  "homepage": "https://experiments.destesoft.com/konami-code/",
+  "bugs": {
+    "url": "https://github.com/israel-munoz/konami-code-js/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Israel Munoz",
+    "email": "israel.munoz.v@gmail.com",
+    "url": "https://deployando.net/"
+  },
+  "readme": "https://github.com/israel-munoz/konami-code-js/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/israel-munoz/konami-code-js/"
+  },
+  "scripts": {
+    "build": "gulp"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-uglify": "^3.0.2"
+  }
+}

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Konami Code JS | DesteSoft Experiments</title>
+  <meta name="title" content="Konami Code JS | DesteSoft Experiments">
+  <meta name="description" content="Konami Code JS demo.">
+  <meta name="author" content="Israel Muñoz">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://experiments.destesoft.com/konami-code/">
+  <meta property="og:title" content="Konami Code JS | DesteSoft Experiments">
+  <meta property="og:description" content="Konami Code JS demo.">
+  <meta property="og:image" content="https://experiments.destesoft.com/konami-code/assets/poster.png">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:site" content="https://experiments.destesoft.com/konami-code/">
+  <meta property="twitter:title" content="Konami Code JS | DesteSoft Experiments">
+  <meta property="twitter:description" content="Konami Code JS demo.">
+  <meta property="twitter:image" content="https://experiments.destesoft.com/konami-code/assets/poster.png">
+  <link rel="canonical" href="https://experiments.destesoft.com/konami-code/">
+  <link rel="shortcut icon" href="assets/favicon.svg" type="image/svg">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137839577-1"></script>
+  <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-137839577-1');</script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'consolas', monospace;
+      font-size: 16px;
+      background: #000;
+    }
+
+    header {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 400%;
+      margin: 1rem;
+      text-shadow: 0 0 0.1em #fff, 0 0 0.05em #fff, 0 0 0.05em #fff, 0 0 0.05em #fff;
+    }
+
+    h1.run {
+      animation: konami 1.4s linear 1 normal;
+    }
+
+    h1 img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 8em;
+      margin: 0 auto;
+    }
+
+    .source-code {
+      text-align: center;
+      font-size: 160%;
+    }
+
+    .source-code a {
+      font-weight: 600;
+      color: #cc3347;
+      padding: 0.5em;
+      display: inline-block;
+      outline: none;
+      transition: filter .2s linear;
+    }
+
+    .source-code a:focus,
+    .source-code a:hover {
+      filter: drop-shadow(0 0 10px #cc3347) brightness(1.5);
+    }
+
+    .instructions {
+      padding: 1em;
+      color: #ddd;
+      font-size: 140%;
+      text-align: center;
+    }
+
+    .keys {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 80%;
+    }
+
+    .keys li {
+      background: url('https://upload.wikimedia.org/wikipedia/commons/3/30/Nes_controller.svg') no-repeat 0 0 / 38em;
+      width: 6em;
+      height: 6em;
+      margin: 0.5em;
+      text-indent: -100em;
+      overflow: hidden;
+    }
+
+    .keys li {
+      position: relative;
+    }
+
+    .keys li::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      box-shadow: inset 0 0 0.25em 0.05em #fff;
+      top: 0;
+      left: 0;
+    }
+
+    .keys .up::before,
+    .keys .down::before,
+    .keys .left::before,
+    .keys .right::before {
+      content: '';
+      display: block;
+      background: linear-gradient(45deg, transparent 0, transparent 44%, #f00 44%, #f00 56%, transparent 56%),
+        linear-gradient(0deg, #f00 0%, #f00 22%, transparent 22%) no-repeat bottom right / 50% 50%,
+        linear-gradient(90deg, transparent 80%, #f00 80%, #f00 100%) no-repeat bottom right / 50% 50%;
+      width: 40%;
+      height: 40%;
+      position: absolute;
+      left: 30%;
+      top: 30%;
+    }
+
+    .keys .up {
+      background-position: -3.3em -5.2em;
+    }
+
+    .keys .up::before {
+      transform: rotate(225deg);
+    }
+
+    .keys .down {
+      background-position: -3.3em -7.4em;
+    }
+
+    .keys .down::before {
+      transform: rotate(45deg);
+    }
+
+    .keys .left {
+      background-position: -2.2em -6.3em;
+    }
+
+    .keys .left::before {
+      transform: rotate(135deg);
+    }
+
+    .keys .right {
+      background-position: -4.5em -6.3em;
+    }
+
+    .keys .right::before {
+      transform: rotate(315deg);
+    }
+
+    .keys .b {
+      background-position: -23.9em -8.7em;
+    }
+
+    .keys .a {
+      background-position: -28.8em -8.7em;
+    }
+
+    .keys .start {
+      background-position: -17.4em -7em;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 0.5em;
+      text-align: center;
+      font-size: 90%;
+      color: #888;
+    }
+
+    div {
+      padding: 0.25em 0;
+    }
+
+    footer a {
+      color: #aaa;
+    }
+
+    @keyframes konami {
+      0% {
+        filter: brightness(1);
+      }
+      50% {
+        filter: brightness(2);
+      }
+      100% {
+        filter: brightness(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Konami_4th_logo_1.svg" alt="Konami">
+      Code
+    </h1>
+  </header>
+  <main>
+    <div class="source-code">
+      <a href="https://github.com/israel-munoz/konami-code-js" target="_blank" rel="external noreferrer">konami-code-js</a>
+    </div>
+    <div class="instructions">
+      Use your keyboard to type in the Konami code.
+    </div>
+    <ul class="keys">
+      <li class="up" title="Up">Up</li>
+      <li class="up" title="Up">Up</li>
+      <li class="down" title="Down">Down</li>
+      <li class="down" title="Down">Down</li>
+      <li class="left" title="Left">Left</li>
+      <li class="right" title="Right">Right</li>
+      <li class="left" title="Left">Left</li>
+      <li class="right" title="Right">Right</li>
+      <li class="b" title="B">B</li>
+      <li class="a" title="A">A</li>
+      <li class="start" title="Enter">Start</li>
+    </ul>
+    <audio src="assets/konami-intro.mp3" preload="auto"></audio>
+  </main>
+  <footer>
+    <div>The name KONAMI, the KONAMI logo and the KONAMI intro sound are trademarks of <a href="https://www.konami.com/en/" target="_blank" rel="external noreferrer">Konami Holdings Corporations</a>. No commercial use intended in this website.</div>
+    <div>NES controller is property of <a href="https://www.nintendo.co.jp/corporate/en/index.html" target="_blank">Nintendo Co., Ltd.</a></div>
+  </footer>
+  <script src="konami-code.min.js"></script>
+  <script>
+    function register() {
+      let anim;
+      konamiCode().then(function () {
+        clearTimeout(anim);
+        const h1 = document.querySelector('h1');
+        const audio = document.querySelector('audio');
+        h1.className = 'run';
+        audio.currentTime = 3.4;
+        audio.play();
+        anim = setTimeout(function () {
+          h1.className = '';
+        }, 1400);
+        register();
+      });
+    }
+
+    register();
+  </script>
+</body>
+</html>
